@@ -35,14 +35,7 @@ $('body').keydown(function(evt) {
 	}
 });
 
-var i = 0; // Declare a global variable to hold the current iteration value.
-var eye = [ "zero", "one", "two", "three", "four", "five", "six" ]
-function changeClass(){
-    $("#cube").removeClass("cube" + eye[i]);
-        i = (i==6)?1:i+1;    
-    $("#cube").addClass("cube" + eye[i]);
-}
-function addNumber() {
+function populateSides() {
 	document.getElementById('c1_1').innerHTML = '<img src="http://sciencenordic.com/sites/default/files/imagecache/620x/rabbit_0.jpg" style="width: 100%; height: 100%" />'
 	document.getElementById('c1_2').innerHTML = i;
 	document.getElementById('c1_3').innerHTML = "Three";
@@ -50,3 +43,20 @@ function addNumber() {
 	document.getElementById('c1_5').innerHTML = "Five";
 	document.getElementById('c1_6').innerHTML = "Six";
 }
+
+function readURL(input,imgtag) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(imgtag).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgside1").change(function(){ readURL(this,'#img1'); });
+$("#imgside2").change(function(){ readURL(this,'#img2'); });
+$("#imgside3").change(function(){ readURL(this,'#img3'); });
+$("#imgside4").change(function(){ readURL(this,'#img4'); });
+$("#imgside5").change(function(){ readURL(this,'#img5'); });
+$("#imgside6").change(function(){ readURL(this,'#img6'); });
