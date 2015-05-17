@@ -54,6 +54,12 @@
   max-height: 150px;
 }
 
+#cropContainerHeader {
+  width: 200px;
+  height: 150px;
+  position:relative; /* or fixed or absolute */
+}
+
 #cube .one  {
   -webkit-transform: rotateX(90deg) translateZ(133px);
   -moz-transform: rotateX(90deg) translateZ(133px);

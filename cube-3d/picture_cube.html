@@ -7,6 +7,7 @@
 	<meta name="author" content="Aaron Robinson" />
 	<link rel="stylesheet" href="css/experiment-styles.css" />
 	<link rel="stylesheet" href="css/experiment.css" />
+	<link rel="stylesheet" href="css/croppic.css" />
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body class="experiment">
@@ -16,12 +17,12 @@
 		</p>
 		<div id="experiment">
 			<div id="cube">
-				<div id="c1_1" class="face one"></div>
-				<div id="c1_2" class="face two"></div>
-				<div id="c1_3" class="face three"></div>
-				<div id="c1_4" class="face four"></div>
-				<div id="c1_5" class="face five"></div>
-				<div id="c1_6" class="face six"></div>
+				<div id="c1_1" class="face one"><img id="i1_1" src="#" style="width: 100%; height: 100%" /></div>
+				<div id="c1_2" class="face two"><img id="i1_2" src="#" style="width: 100%; height: 100%" /></div>
+				<div id="c1_3" class="face three"><img id="i1_3" src="#" style="width: 100%; height: 100%" /></div>
+				<div id="c1_4" class="face four"><img id="i1_4" src="#" style="width: 100%; height: 100%" /></div>
+				<div id="c1_5" class="face five"><img id="i1_5" src="#" style="width: 100%; height: 100%" /></div>
+				<div id="c1_6" class="face six"><img id="i1_6" src="#" style="width: 100%; height: 100%" /></div>
 			</div>
 		</div>
 		<button onclick="populateSides()" type="button">Populate Sides</button>
@@ -51,10 +52,12 @@
 	    		<input type='file' id="imgside6" />
 				<div class="picsquare"><img id="img6" src="#" /></div>
 			</form>
+			<div id="croppic1"></div>
 		</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="js/experiment.js"></script>
+	<script src="js/croppic.min.js"></script>
 </body>
 </html>
 
