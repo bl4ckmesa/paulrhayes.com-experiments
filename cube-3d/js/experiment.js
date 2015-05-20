@@ -37,6 +37,28 @@ $('body').keydown(function(evt) {
 	}
 });
 
+function rotateCube(direction) {
+	switch(direction) {
+    	case 'left':
+        	yAngle -= 90;
+        	break;
+
+    	case 'up':
+        	xAngle += 90;
+        	break;
+
+    	case 'right':
+        	yAngle += 90;
+        	break;
+
+    	case 'down':
+        	xAngle -= 90;
+        	break;
+	};
+	document.getElementById('cube').style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+
+}
+
 function showNumbers(showhide) {
 	for (var i=1; i < 7; i++) {
 		if (showhide == "hide") {

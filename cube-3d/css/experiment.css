@@ -5,6 +5,8 @@
   -moz-perspective-origin: 50% 200px;
   perspective: 800px;
   perspective-origin: 50% 200px;
+  background-image: url(../images/sonic.gif);
+  background-repeat: no-repeat;
 }
 
 #cube {

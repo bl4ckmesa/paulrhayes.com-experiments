@@ -16,11 +16,11 @@
 		<p class="learn">
 			Quixzle, <a href="http://www.devshm.com/">By DevSHM</a>.
 		</p>
-			<button class="btn btn-primary" onclick="showNumbers()" type="button">Show #</button>
-			<button class="btn btn-primary" onclick="showNumbers('hide')" type="button">Hide #</button>
-			<button class="btn btn-primary" onclick="setimage('images/5.png')" data-toggle="modal" data-target="#cropperModal" type="button">Crop</button>
 		<table align="center" width="100%"><tr><td>
-			<div id="experiment">
+			<div id="experiment" align="center">
+				<button class="btn btn-primary" onclick="showNumbers()" type="button">Show #</button>
+				<button class="btn btn-primary" onclick="showNumbers('hide')" type="button">Hide #</button>
+				<button class="btn btn-primary" onclick="setimage('images/5.png')" data-toggle="modal" data-target="#cropperModal" type="button">Crop</button>
 				<div id="cube">
 					<div id="c1_1" class="face one">
 						<img src="images/nsg.png" class="imageover full" />
@@ -53,6 +53,18 @@
 						<img id="i1_6" src="#" class="imageunder full" />
 					</div>
 				</div>
+				<button class="btn btn-default btn-sm" onclick="rotateCube('left')">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+				</button>
+				<button class="btn btn-default btn-sm" onclick="rotateCube('right')">
+					<span class="glyphicon glyphicon-arrow-right"></span>
+				</button>
+				<button class="btn btn-default btn-sm" onclick="rotateCube('up')">
+					<span class="glyphicon glyphicon-arrow-up"></span>
+				</button>
+				<button class="btn btn-default btn-sm" onclick="rotateCube('down')">
+					<span class="glyphicon glyphicon-arrow-down"></span>
+				</button>
 			</div>
 		</td>
 		<td width="50%">
@@ -85,7 +97,7 @@
 		</td></tr></table>
 		<div class="modal fade" id="cropperModal">
 	  		<div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div id="cropper">
-	    		<img id="cropperImage" src="images/nsg.jpg" />
+	    		<img id="cropperImage" src="images/nsg.png" />
 	    	</div> </div> </div> </div>
 		</div>
 	</div>
