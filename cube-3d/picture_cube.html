@@ -7,7 +7,8 @@
 	<meta name="author" content="Aaron Robinson" />
 	<link rel="stylesheet" href="css/experiment-styles.css" />
 	<link rel="stylesheet" href="css/experiment.css" />
-	<link rel="stylesheet" href="css/croppic.css" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/cropper.min.css" />
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body class="experiment">
@@ -15,49 +16,84 @@
 		<p class="learn">
 			Quixzle, <a href="http://www.devshm.com/">By DevSHM</a>.
 		</p>
-		<div id="experiment">
-			<div id="cube">
-				<div id="c1_1" class="face one"><img id="i1_1" src="#" style="width: 100%; height: 100%" /></div>
-				<div id="c1_2" class="face two"><img id="i1_2" src="#" style="width: 100%; height: 100%" /></div>
-				<div id="c1_3" class="face three"><img id="i1_3" src="#" style="width: 100%; height: 100%" /></div>
-				<div id="c1_4" class="face four"><img id="i1_4" src="#" style="width: 100%; height: 100%" /></div>
-				<div id="c1_5" class="face five"><img id="i1_5" src="#" style="width: 100%; height: 100%" /></div>
-				<div id="c1_6" class="face six"><img id="i1_6" src="#" style="width: 100%; height: 100%" /></div>
+			<button class="btn btn-primary" onclick="showNumbers()" type="button">Show #</button>
+			<button class="btn btn-primary" onclick="showNumbers('hide')" type="button">Hide #</button>
+			<button class="btn btn-primary" onclick="setimage('images/5.png')" data-toggle="modal" data-target="#cropperModal" type="button">Crop</button>
+		<table align="center" width="100%"><tr><td>
+			<div id="experiment">
+				<div id="cube">
+					<div id="c1_1" class="face one">
+						<img src="images/nsg.png" class="imageover full" />
+						<img id="n1_1" src="#" class="imageover full" />
+						<img id="i1_1" src="#" class="imageunder full" />
+					</div>
+					<div id="c1_2" class="face two">
+						<img src="images/nsg.png" class="imageover full" />
+						<img id="n1_2" src="#" class="imageover full" />
+						<img id="i1_2" src="#" class="imageunder full" />
+					</div>
+					<div id="c1_3" class="face three">
+						<img src="images/nsg.png" class="imageover full" />
+						<img id="n1_3" src="#" class="imageover full" />
+						<img id="i1_3" src="#" class="imageunder full" />
+					</div>
+					<div id="c1_4" class="face four">
+						<img src="images/nsg.png" class="imageover full" />
+						<img id="n1_4" src="#" class="imageover full" />
+						<img id="i1_4" src="#" class="imageunder full" />
+					</div>
+					<div id="c1_5" class="face five">
+						<img src="images/nsg.png" class="imageover full" />
+						<img id="n1_5" src="#" class="imageover full" />
+						<img id="i1_5" src="#" class="imageunder full" />
+					</div>
+					<div id="c1_6" class="face six">
+						<img src="images/nsg.png" class="imageover full" />
+						<img id="n1_6" src="#" class="imageover full" />
+						<img id="i1_6" src="#" class="imageunder full" />
+					</div>
+				</div>
 			</div>
-		</div>
-		<button onclick="populateSides()" type="button">Populate Sides</button>
-		<div class="pics" align="center">
-			<form id="formside1" runat="server">
-	    		<input type='file' id="imgside1">
-					<div class="picsquare"><img id="img1" src="#" /></div>
-				</input>
-			</form>
-			<form id="formside2" runat="server">
-	    		<input type='file' id="imgside2" />
-				<div class="picsquare"><img id="img2" src="#" /></div>
-			</form>
-			<form id="formside3" runat="server">
-	    		<input type='file' id="imgside3" />
-				<div class="picsquare"><img id="img3" src="#" /></div>
-			</form>
-			<form id="formside4" runat="server">
-	    		<input type='file' id="imgside4" />
-				<div class="picsquare"><img id="img4" src="#" /></div>
-			</form>
-			<form id="formside5" runat="server">
-	    		<input type='file' id="imgside5" />
-				<div class="picsquare"><img id="img5" src="#" /></div>
-			</form>
-			<form id="formside6" runat="server">
-	    		<input type='file' id="imgside6" />
-				<div class="picsquare"><img id="img6" src="#" /></div>
-			</form>
-			<div id="croppic1"></div>
+		</td>
+		<td width="50%">
+			<div class="pics">
+				<div class="pic">
+					<label for="imgside1"> <div class="picsquare"><img class="full" id="img1" src="#" /></div> </label>
+		    		<input type='file' id="imgside1"> </input>
+				</div>
+				<div class="pic">
+					<label for="imgside2"> <div class="picsquare"><img class="full" id="img2" src="#" /></div> </label>
+		    		<input type='file' id="imgside2"> </input>
+				</div>
+				<div class="pic">
+					<label for="imgside3"> <div class="picsquare"><img class="full" id="img3" src="#" /></div> </label>
+		    		<input type='file' id="imgside3"> </input>
+				</div>
+				<div class="pic">
+					<label for="imgside4"> <div class="picsquare"><img class="full" id="img4" src="#" /></div> </label>
+		    		<input type='file' id="imgside4"> </input>
+				</div>
+				<div class="pic">
+					<label for="imgside5"> <div class="picsquare"><img class="full" id="img5" src="#" /></div> </label>
+		    		<input type='file' id="imgside5"> </input>
+				</div>
+				<div class="pic">
+					<label for="imgside6"> <div class="picsquare"><img class="full" id="img6" src="#" /></div> </label>
+		    		<input type='file' id="imgside6"> </input>
+				</div>
+			</div>
+		</td></tr></table>
+		<div class="modal fade" id="cropperModal">
+	  		<div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div id="cropper">
+	    		<img id="cropperImage" src="images/nsg.jpg" />
+	    	</div> </div> </div> </div>
 		</div>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="js/cropper.min.js"></script>
+	<script src="js/bootstrap-filestyle.min.js"></script>
 	<script src="js/experiment.js"></script>
-	<script src="js/croppic.min.js"></script>
 </body>
 </html>
 

@@ -37,20 +37,16 @@ $('body').keydown(function(evt) {
 	}
 });
 
-function populateSides() {
-	$("#i1_1").attr('src', "images/Transparent.gif");
-	$("#i1_2").attr('src', "images/Transparent.gif");
-	$("#i1_3").attr('src', "images/Transparent.gif");
-	$("#i1_4").attr('src', "images/Transparent.gif");
-	$("#i1_5").attr('src', "images/Transparent.gif");
-	$("#i1_6").attr('src', "images/Transparent.gif");
-
-	$("#img1").attr('src', "images/Transparent.gif");
-	$("#img2").attr('src', "images/Transparent.gif");
-	$("#img3").attr('src', "images/Transparent.gif");
-	$("#img4").attr('src', "images/Transparent.gif");
-	$("#img5").attr('src', "images/Transparent.gif");
-	$("#img6").attr('src', "images/Transparent.gif");
+function showNumbers(showhide) {
+	for (var i=1; i < 7; i++) {
+		if (showhide == "hide") {
+			$("#n1_"+i).attr('src','images/Transparent.gif')
+			$("#img"+i).attr('src', 'images/Transparent.gif');
+		} else {
+			$("#n1_"+i).attr('src', "images/"+i+".png");
+			$("#img"+i).attr('src', "images/"+i+".png");
+		}
+	}
 }
 
 function readURL(input,imgtag,cubesideimg) {
@@ -64,6 +60,19 @@ function readURL(input,imgtag,cubesideimg) {
     }
 }
 
+function setimage(imgsrc) {
+	$("#cropperImage").attr('src', imgsrc);	
+}
+
+/// INIT
+showNumbers();
+//$(":file").filestyle({ input: false });
+
+for (var i=1; i< 7; i++) {
+	$("#i1_"+i).attr('src', "images/Transparent.gif");
+}
+
+// Listeners
 $("#imgside1").change(function(){ readURL(this,'#img1','#i1_1'); });
 $("#imgside2").change(function(){ readURL(this,'#img2','#i1_2'); });
 $("#imgside3").change(function(){ readURL(this,'#img3','#i1_3'); });
@@ -71,20 +80,28 @@ $("#imgside4").change(function(){ readURL(this,'#img4','#i1_4'); });
 $("#imgside5").change(function(){ readURL(this,'#img5','#i1_5'); });
 $("#imgside6").change(function(){ readURL(this,'#img6','#i1_6'); });
 
+// Cropping
+var cropperOptions = {
+	autoCropArea: 1,
+	aspectRatio: 1/1,
+	modal: true,
+	built: function () {
+		// Strict mode: set crop box data first
+		$image.cropper('setCropBoxData', cropBoxData);
+		$image.cropper('setCanvasData', canvasData);
+	}
+}
+var $image = $('#cropper > img'),
+    cropBoxData,
+    canvasData;
+
+$('#cropperModal').on('shown.bs.modal', function () {
+  $image.cropper(cropperOptions);
+}).on('hidden.bs.modal', function () {
+  cropBoxData = $image.cropper('getCropBoxData');
+  canvasData = $image.cropper('getCanvasData');
+  $image.cropper('destroy');
+});
 
 
-// cropperOptions = {
-// 	uploadUrl:'php/img_save_to_file.php',
-// 	cropUrl:'php/img_crop_to_file.php',
-// 	zoomFactor:10,
-// 	doubleZoomControls:true,
-// 	rotateFactor:10,
-// 	rotateControls:true,
-// 	modal:true
-// }		
-// 		
-// var cropper = new Croppic('croppic1', cropperOptions);
-// cropper.destroy() 	// no need explaining here :) 
-// cropper.reset() 	// destroys and then inits the cropper
 
-populateSides();

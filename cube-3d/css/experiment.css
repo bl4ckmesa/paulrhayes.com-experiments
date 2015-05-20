@@ -9,9 +9,9 @@
 
 #cube {
   position: relative;
-  margin: 100px auto;
-  height: 220px;
-  width: 220px;
+  margin: 50px auto;
+  height: 300px;
+  width: 300px;
   -webkit-transition: -webkit-transform 2s linear;
   -webkit-transform-style: preserve-3d;
   -moz-transition: -moz-transform 2s linear;
@@ -20,38 +20,63 @@
   transform-style: preserve-3d;
 }
 
+.imageunder {
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:-1;
+}
+
+.imageover {
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:1;
+}
+
 .face {
   position: absolute;
-  height: 227px;
-  width: 227px;
-  padding: 20px;
+  height: 300px;
+  width: 300px;
+  padding: 0px;
   /* background-color: rgba(50, 50, 50, 0.7); */
-  background-color: rgba(80, 80, 80, 0.2);
+  background-color: rgba(80, 80, 80, 0.1);
   font-size: 27px;
   line-height: 1em;
   color: #fff;
   border: 1px solid #555;
   border-radius: 3px;
+  opacity: 1;
 }
 
-.pics form {
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+.pic {
   display: inline-block;
 }
 
+.pics {
+  position: absolute;
+  top:20%;
+}
+
 .pics input {
-  width: 150px;
+  width: 125px;
   margin: 5px;
 }
 
 .pics .picsquare {
   border:2px solid black;
-  height: 150px;
-  width: 150px;
+  height: 125px;
+  width: 125px;
 }
 
 .pics .picsquare img {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 125px;
+  max-height: 125px;
 }
 
 #cropContainerHeader {
@@ -61,37 +86,37 @@
 }
 
 #cube .one  {
-  -webkit-transform: rotateX(90deg) translateZ(133px);
-  -moz-transform: rotateX(90deg) translateZ(133px);
-  transform: rotateX(90deg) translateZ(133px);
+  -webkit-transform: rotateX(90deg) translateZ(150px);
+  -moz-transform: rotateX(90deg) translateZ(150px);
+  transform: rotateX(90deg) translateZ(150px);
 }
 
 #cube .two {
-  -webkit-transform: translateZ(133px);
-  -moz-transform: translateZ(133px);
-  transform: translateZ(133px);
+  -webkit-transform: translateZ(150px);
+  -moz-transform: translateZ(150px);
+  transform: translateZ(150px);
 }
 
 #cube .three {
-  -webkit-transform: rotateY(90deg) translateZ(133px);
-  -moz-transform: rotateY(90deg) translateZ(133px);
-  transform: rotateY(90deg) translateZ(133px);
+  -webkit-transform: rotateY(90deg) translateZ(150px);
+  -moz-transform: rotateY(90deg) translateZ(150px);
+  transform: rotateY(90deg) translateZ(150px);
 }
 
 #cube .four {
-  -webkit-transform: rotateY(180deg) translateZ(133px);
-  -moz-transform: rotateY(180deg) translateZ(133px);
-  transform: rotateY(180deg) translateZ(133px);
+  -webkit-transform: rotateY(180deg) translateZ(150px);
+  -moz-transform: rotateY(180deg) translateZ(150px);
+  transform: rotateY(180deg) translateZ(150px);
 }
 
 #cube .five {
-  -webkit-transform: rotateY(-90deg) translateZ(133px);
-  -moz-transform: rotateY(-90deg) translateZ(133px);
-  transform: rotateY(-90deg) translateZ(133px);
+  -webkit-transform: rotateY(-90deg) translateZ(150px);
+  -moz-transform: rotateY(-90deg) translateZ(150px);
+  transform: rotateY(-90deg) translateZ(150px);
 }
 
 #cube .six {
-  -webkit-transform: rotateX(-90deg) rotate(180deg) translateZ(133px);
-  -moz-transform: rotateX(-90deg) rotate(180deg) translateZ(133px);
-  transform: rotateX(-90deg) rotate(180deg) translateZ(133px);
+  -webkit-transform: rotateX(-90deg) rotate(180deg) translateZ(150px);
+  -moz-transform: rotateX(-90deg) rotate(180deg) translateZ(150px);
+  transform: rotateX(-90deg) rotate(180deg) translateZ(150px);
 }
