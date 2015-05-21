@@ -18,10 +18,11 @@
 		</p>
 		<table align="center" width="100%"><tr><td>
 			<div id="experiment" align="center">
+				<button class="btn btn-primary" onclick="loadNewPage()" type="button">Load New Project</button>
 				<button class="btn btn-primary" onclick="showNumbers()" type="button">Show #</button>
 				<button class="btn btn-primary" onclick="showNumbers('hide')" type="button">Hide #</button>
-				<button class="btn btn-primary" onclick="setimage('images/5.png')" data-toggle="modal" data-target="#cropperModal" type="button">Crop</button>
-				<div id="cube">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#cropperModal" type="button">Crop</button>
+				<div id="cube1" class="cube">
 					<div id="c1_1" class="face one">
 						<img src="images/nsg.png" class="imageover full" />
 						<img id="n1_1" src="#" class="imageover full" />
@@ -53,16 +54,16 @@
 						<img id="i1_6" src="#" class="imageunder full" />
 					</div>
 				</div>
-				<button class="btn btn-default btn-sm" onclick="rotateCube('left')">
+				<button class="btn btn-default btn-sm" onclick="rotateCube('left','cube1')">
 					<span class="glyphicon glyphicon-arrow-left"></span>
 				</button>
-				<button class="btn btn-default btn-sm" onclick="rotateCube('right')">
+				<button class="btn btn-default btn-sm" onclick="rotateCube('right','cube1')">
 					<span class="glyphicon glyphicon-arrow-right"></span>
 				</button>
-				<button class="btn btn-default btn-sm" onclick="rotateCube('up')">
+				<button class="btn btn-default btn-sm" onclick="rotateCube('up','cube1')">
 					<span class="glyphicon glyphicon-arrow-up"></span>
 				</button>
-				<button class="btn btn-default btn-sm" onclick="rotateCube('down')">
+				<button class="btn btn-default btn-sm" onclick="rotateCube('down','cube1')">
 					<span class="glyphicon glyphicon-arrow-down"></span>
 				</button>
 			</div>

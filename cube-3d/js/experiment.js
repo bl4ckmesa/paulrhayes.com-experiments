@@ -1,63 +1,39 @@
 var images = {};
+var xAngle = 0, yAngle = 0;
+var globalimgtag = "";
+var globalcubesideimg = "";
 
 var props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '),
-    prop,
-    el = document.createElement('div');
+	prop,
+	el = document.createElement('div');
 
 for(var i = 0, l = props.length; i < l; i++) {
-    if(typeof el.style[props[i]] !== "undefined") {
-        prop = props[i];
-        break;
-    }
+	if(typeof el.style[props[i]] !== "undefined") {
+		prop = props[i];
+		break;
+	}
 }
 
-var xAngle = 0, yAngle = 0;
+function rotateCube(direction,cube) {
+	switch(direction) {
+		case 'left':	yAngle -= 90; break; 
+		case 'right':	yAngle += 90; break; 
+		case 'up':		xAngle += 90; break; 
+		case 'down':	xAngle -= 90; break;
+	};
+	document.getElementById(cube).style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+}
+
 $('body').keydown(function(evt) {
-	if ($('#cube:hover').length != 0) {
-    	switch(evt.keyCode) {
-        	case 37: // left
-            	yAngle -= 90;
-            	break;
-	
-        	case 38: // up
-            	xAngle += 90;
-            	evt.preventDefault();
-            	break;
-	
-        	case 39: // right
-            	yAngle += 90;
-            	break;
-	
-        	case 40: // down
-            	xAngle -= 90;
-            	evt.preventDefault();
-            	break;
-    	};
-    	document.getElementById('cube').style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+	if ($('#cube1:hover').length != 0) {
+		switch(evt.keyCode) {
+			case 37: rotateCube('left','cube1');	break;
+			case 39: rotateCube('right','cube1');	break;
+			case 38: rotateCube('up','cube1');		evt.preventDefault(); break;
+			case 40: rotateCube('down','cube1');	evt.preventDefault(); break;
+		};
 	}
 });
-
-function rotateCube(direction) {
-	switch(direction) {
-    	case 'left':
-        	yAngle -= 90;
-        	break;
-
-    	case 'up':
-        	xAngle += 90;
-        	break;
-
-    	case 'right':
-        	yAngle += 90;
-        	break;
-
-    	case 'down':
-        	xAngle -= 90;
-        	break;
-	};
-	document.getElementById('cube').style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
-
-}
 
 function showNumbers(showhide) {
 	for (var i=1; i < 7; i++) {
@@ -72,21 +48,34 @@ function showNumbers(showhide) {
 }
 
 function readURL(input,imgtag,cubesideimg) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $(imgtag).attr('src', e.target.result);
-            $(cubesideimg).attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			setCropperImage(e.target.result);
+			$('#cropperModal').modal("show");
+			//$(imgtag).attr('src', e.target.result);
+			//$(cubesideimg).attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
-function setimage(imgsrc) {
+function setCropperImage(imgsrc) {
 	$("#cropperImage").attr('src', imgsrc);	
 }
 
+// Load page without hash, meaning it's a new project, basically.
+function loadNewPage() {
+	window.open('http://' + window.location.hostname + window.location.pathname, '_self');
+}
+
 /// INIT
+if (window.location.hash) {
+	session_hash = window.location.hash
+} else {
+	var session_hash = Math.random().toString(36).slice(2);
+	location.hash = session_hash;
+}
 showNumbers();
 //$(":file").filestyle({ input: false });
 
@@ -114,14 +103,19 @@ var cropperOptions = {
 	}
 }
 var $image = $('#cropper > img'),
-    cropBoxData,
-    canvasData;
+	cropBoxData,
+	canvasData;
 
 $('#cropperModal').on('shown.bs.modal', function () {
   $image.cropper(cropperOptions);
 }).on('hidden.bs.modal', function () {
   cropBoxData = $image.cropper('getCropBoxData');
   canvasData = $image.cropper('getCanvasData');
+  console.log(cropBoxData);
+  // Here we need to take the image and the cropBoxData and send it to
+  // the server for cropping.
+  //$(globalimgtag).attr('src', e.target.result);
+  //$(globalcubesideimg).attr('src', e.target.result);
   $image.cropper('destroy');
 });
 
