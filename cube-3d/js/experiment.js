@@ -139,8 +139,8 @@ showNumbers();
 //$(":file").filestyle({ input: false });
 
 for (var i=1; i< 7; i++) {
-	$("#i1_"+i).attr('src', "php/img/" + project_dir + "/c1_" + i);
-	$("#img"+i).attr('src', "php/img/" + project_dir + "/c1_" + i);
+	$("#i1_"+i).attr('src', "php/img/" + project_dir + "/c1_" + i + ".png");
+	$("#img"+i).attr('src', "php/img/" + project_dir + "/c1_" + i + ".png");
 }
 
 // Listeners
