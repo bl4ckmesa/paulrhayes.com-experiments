@@ -12,6 +12,14 @@
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body class="experiment">
+	<script>
+		function transImg(img) {
+			img.onerror = '';
+			img.src = 'images/Transparent.gif';
+			return true;
+		}
+	</script>
+
 	<div class="wrapper">
 		<p class="learn">
 			Quixzle, <a href="http://www.devshm.com/">By DevSHM</a>.
@@ -21,7 +29,6 @@
 				<button class="btn btn-primary" onclick="loadNewPage()" type="button">Load New Project</button>
 				<button class="btn btn-primary" onclick="showNumbers()" type="button">Show #</button>
 				<button class="btn btn-primary" onclick="showNumbers('hide')" type="button">Hide #</button>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#cropperModal" type="button">Crop</button>
 				<div id="cube1" class="cube">
 					<div id="c1_1" class="face one">
 						<img src="images/nsg.png" class="imageover full" />
@@ -71,37 +78,56 @@
 		<td width="50%">
 			<div class="pics">
 				<div class="pic">
-					<label for="imgside1"> <div class="picsquare"><img class="full" id="img1" src="#" /></div> </label>
-		    		<input type='file' id="imgside1"> </input>
+					<label for="imgside1"> <div class="picsquare">
+						<img class="full" id="squaren1_1" style="position: absolute;" src="#" />
+						<img class="full" id="img1" onerror="transImg(this);" src="#" />
+					</div> </label>
+					<input type='file' id="imgside1"> </input>
 				</div>
 				<div class="pic">
-					<label for="imgside2"> <div class="picsquare"><img class="full" id="img2" src="#" /></div> </label>
-		    		<input type='file' id="imgside2"> </input>
+					<label for="imgside2"> <div class="picsquare">
+						<img class="full" id="squaren1_2" style="position: absolute;" src="#" />
+						<img class="full" id="img2" onerror="transImg(this);" src="#" />
+					</div> </label>
+					<input type='file' id="imgside2"> </input>
 				</div>
 				<div class="pic">
-					<label for="imgside3"> <div class="picsquare"><img class="full" id="img3" src="#" /></div> </label>
-		    		<input type='file' id="imgside3"> </input>
+					<label for="imgside3"> <div class="picsquare">
+						<img class="full" id="squaren1_3" style="position: absolute;" src="#" />
+						<img class="full" id="img3" onerror="transImg(this);" src="#" />
+					</div> </label>
+					<input type='file' id="imgside3"> </input>
 				</div>
 				<div class="pic">
-					<label for="imgside4"> <div class="picsquare"><img class="full" id="img4" src="#" /></div> </label>
-		    		<input type='file' id="imgside4"> </input>
+					<label for="imgside4"> <div class="picsquare">
+						<img class="full" id="squaren1_4" style="position: absolute;" src="#" />
+						<img class="full" id="img4" onerror="transImg(this);" src="#" />
+					</div> </label>
+					<input type='file' id="imgside4"> </input>
 				</div>
 				<div class="pic">
-					<label for="imgside5"> <div class="picsquare"><img class="full" id="img5" src="#" /></div> </label>
-		    		<input type='file' id="imgside5"> </input>
+					<label for="imgside5"> <div class="picsquare">
+						<img class="full" id="squaren1_5" style="position: absolute;" src="#" />
+						<img class="full" id="img5" onerror="transImg(this);" src="#" />
+					</div> </label>
+					<input type='file' id="imgside5"> </input>
 				</div>
 				<div class="pic">
-					<label for="imgside6"> <div class="picsquare"><img class="full" id="img6" src="#" /></div> </label>
-		    		<input type='file' id="imgside6"> </input>
+					<label for="imgside6"> <div class="picsquare">
+						<img class="full" id="squaren1_6" style="position: absolute;" src="#" />
+						<img class="full" id="img6" onerror="transImg(this);" src="#" />
+					</div> </label>
+					<input type='file' id="imgside6"> </input>
 				</div>
 			</div>
 		</td></tr></table>
 		<div class="modal fade" id="cropperModal">
-	  		<div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div id="cropper">
-	    		<img id="cropperImage" src="images/nsg.png" />
-	    	</div> </div> </div> </div>
+			<div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div id="cropper">
+				<img id="cropperImage" src="images/nsg.png" />
+			</div> </div> </div> </div>
 		</div>
 	</div>
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="js/cropper.min.js"></script>
