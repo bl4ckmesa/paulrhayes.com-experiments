@@ -30,6 +30,19 @@ function rotateCube(direction,cube) {
 		case 'down':	xAngle -= 90; break;
 	};
 	document.getElementById(cube).style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+	console.log("xAngle: ", xAngle, ", yAngle: ", yAngle);
+}
+
+function rotateToSide(side, cube) {
+	switch(side) {
+		case 'one':		xAngle = -90; yAngle = 0; break;
+		case 'two':		xAngle = 0; yAngle = 0; break;
+		case 'three':	xAngle = 0; yAngle = -90; break;
+		case 'four':	xAngle = 0; yAngle = 180; break;
+		case 'five':	xAngle = 0; yAngle = 90; break;
+		case 'six':		xAngle = 90; yAngle = 180; break;
+	};
+	document.getElementById(cube).style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
 }
 
 $('body').keydown(function(evt) {
@@ -242,6 +255,7 @@ $("#imgside3_6").change(function(){ globalimgside = "imgside3_6"; readURL(this,'
 var cropperOptions = {
 	autoCropArea: 1,
 	aspectRatio: 1/1,
+	autoCropArea: 1,
 	modal: true,
 	built: function () {
 		// Strict mode: set crop box data first

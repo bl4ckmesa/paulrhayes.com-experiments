@@ -9,6 +9,64 @@
   background-repeat: no-repeat; */
 }
 
+.backone {
+  position:absolute;
+  left:0px;
+  top:60px;
+  height: 450px;
+  z-index:-1;
+}
+
+.backonefade {
+  position:absolute;
+  left:300px;
+  top:60px;
+  height: 450px;
+  width: 65%;
+  z-index:-1;
+}
+
+.backtwo {
+  position:absolute;
+  left:0px;
+  top:510px;
+  height: 450px;
+  z-index:-1;
+}
+
+.backtwofade {
+  position:absolute;
+  left:300px;
+  top:510px;
+  height: 450px;
+  width: 65%;
+  z-index:-1;
+}
+
+.backthree {
+  position:absolute;
+  left:0px;
+  top:960px;
+  height: 450px;
+  z-index:-1;
+}
+
+.backthreefade {
+  position:absolute;
+  left:300px;
+  top:960px;
+  height: 450px;
+  width: 65%;
+  z-index:-1;
+}
+
+.imageunder {
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:-1;
+}
+
 .cube {
   position: relative;
   margin: 50px auto;
