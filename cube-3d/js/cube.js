@@ -36,7 +36,7 @@ function rotateCube(direction,cube) {
 		case 'down':	xAngle -= 90; break;
 	};
 	document.getElementById(cube).style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
-	console.log("xAngle: ", xAngle, ", yAngle: ", yAngle);
+	//console.log("xAngle: ", xAngle, ", yAngle: ", yAngle);
 }
 
 function rotateToSide(side, cube) {
@@ -250,7 +250,7 @@ function ajaxUpload(data) {
 			$(globalcubesideimg).attr('src', 'php/img/' + project_dir + "/" + globalimgname + ".png?" + nd());
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
-			console.log("just kidding, it wasn't.  Here is the data:", XMLHttpRequest);
+			console.log("Request Failed:", XMLHttpRequest);
 		}
 	});
 }
@@ -310,6 +310,7 @@ var cropperOptions = {
 	aspectRatio: 1/1,
 	autoCropArea: 1,
 	dragCrop: 0,
+	modal: false,
 	built: function () {
 		// Strict mode: set crop box data first
 		$image.cropper('setCropBoxData', cropBoxData);
