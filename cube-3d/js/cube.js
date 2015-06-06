@@ -16,9 +16,15 @@ for(var i = 0, l = props.length; i < l; i++) {
 	}
 }
 
+function nd() {
+	date = new Date().getTime();
+	//console.log("Updating image with: " + date);
+	return "ts=" + date;
+}
+
 function transImg(img) {
 	img.onerror = '';
-	img.src = 'images/Transparent.gif';
+	img.src = 'images/Transparent.gif?' + nd();
 	return true;
 }
 
@@ -44,6 +50,53 @@ function rotateToSide(side, cube) {
 	};
 	document.getElementById(cube).style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
 }
+var mouse = {
+        start : {}
+    },
+    touch = document.ontouchmove !== undefined,
+    viewport = {
+        x: -10,
+        y: 20,
+        el: $('.cube')[0],
+        move: function(coords) {
+            if(coords) {
+                if(typeof coords.x === "number") this.x = coords.x;
+                if(typeof coords.y === "number") this.y = coords.y;
+            }
+            this.el.style[transformProp] = "rotateX("+this.x+"deg) rotateY("+this.y+"deg)";
+        },
+        reset: function() {
+            this.move({x: 0, y: 0});
+        }
+    };
+
+$('.viewport').bind('move-viewport', function(evt, movedMouse) {
+    // Reduce movement on touch screens
+    var movementScaleFactor = touch ? 4 : 1;
+
+    if (!mouse.last) {
+        mouse.last = mouse.start;
+    } else {
+        if (forward(mouse.start.x, mouse.last.x) != forward(mouse.last.x, movedMouse.x)) {
+            mouse.start.x = mouse.last.x;
+        }
+        if (forward(mouse.start.y, mouse.last.y) != forward(mouse.last.y, movedMouse.y)) {
+            mouse.start.y = mouse.last.y;
+        }
+    }
+
+    viewport.move({
+        x: viewport.x + parseInt((mouse.start.y - movedMouse.y)/movementScaleFactor),
+        y: viewport.y - parseInt((mouse.start.x - movedMouse.x)/movementScaleFactor)
+    });
+
+    mouse.last.x = movedMouse.x;
+    mouse.last.y = movedMouse.y;
+
+    function forward(v1, v2) {
+        return v1 >= v2 ? true : false;
+    }
+});
 
 $('body').keydown(function(evt) {
 	if ($('#cube1:hover').length != 0) {
@@ -193,8 +246,8 @@ function ajaxUpload(data) {
 		processData: false,
 		contentType: false,
 		success: function (data) {
-			$(globalimgtag).attr('src', 'php/img/' + project_dir + "/" + globalimgname + ".png");
-			$(globalcubesideimg).attr('src', 'php/img/' + project_dir + "/" + globalimgname + ".png");
+			$(globalimgtag).attr('src', 'php/img/' + project_dir + "/" + globalimgname + ".png?" + nd());
+			$(globalcubesideimg).attr('src', 'php/img/' + project_dir + "/" + globalimgname + ".png?" + nd());
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 			console.log("just kidding, it wasn't.  Here is the data:", XMLHttpRequest);
@@ -219,14 +272,14 @@ showNumbers();
 //$(":file").filestyle({ input: false });
 
 for (var i=1; i< 7; i++) {
-	$("#i1_"+i).attr('src', "php/img/" + project_dir + "/c1_" + i + ".png");
-	$("#squarei1_"+i).attr('src', "php/img/" + project_dir + "/c1_" + i + ".png");
+	$("#i1_"+i).attr('src', "php/img/" + project_dir + "/c1_" + i + ".png?" + nd());
+	$("#squarei1_"+i).attr('src', "php/img/" + project_dir + "/c1_" + i + ".png?" + nd());
 
-	$("#i2_"+i).attr('src', "php/img/" + project_dir + "/c2_" + i + ".png");
-	$("#squarei2_"+i).attr('src', "php/img/" + project_dir + "/c2_" + i + ".png");
+	$("#i2_"+i).attr('src', "php/img/" + project_dir + "/c2_" + i + ".png?" + nd());
+	$("#squarei2_"+i).attr('src', "php/img/" + project_dir + "/c2_" + i + ".png?" + nd());
 
-	$("#i3_"+i).attr('src', "php/img/" + project_dir + "/c3_" + i + ".png");
-	$("#squarei3_"+i).attr('src', "php/img/" + project_dir + "/c3_" + i + ".png");
+	$("#i3_"+i).attr('src', "php/img/" + project_dir + "/c3_" + i + ".png?" + nd());
+	$("#squarei3_"+i).attr('src', "php/img/" + project_dir + "/c3_" + i + ".png?" + nd());
 }
 
 // Listeners
@@ -256,7 +309,9 @@ var cropperOptions = {
 	autoCropArea: 1,
 	aspectRatio: 1/1,
 	autoCropArea: 1,
+	dragCrop: 0,
 	modal: true,
+	responsive: false,
 	built: function () {
 		// Strict mode: set crop box data first
 		$image.cropper('setCropBoxData', cropBoxData);
@@ -271,26 +326,33 @@ var $image = $('#cropper > img'),
 $('#cropperModal').on('shown.bs.modal', function () {
 	$image.cropper(cropperOptions);
 }).on('hidden.bs.modal', function () {
-	cropBoxData = $image.cropper('getCropBoxData');
-	canvasData = $image.cropper('getCanvasData');
-	cropData = $image.cropper('getData');
-	var json = [
-		'{"x":' + cropData.x,
-		'"y":' + cropData.y,
-		'"height":' + cropData.height,
-		'"width":' + cropData.width,
-		'"rotate":' + cropData.rotate + '}'
-	].join();
-	var fileInput = document.getElementById(globalimgside);
-	var file = fileInput.files[0];
-	var formData = new FormData();
-	formData.append('avatar_file', file);
-	formData.append('avatar_data', json);
-	formData.append('avatar_src', '../images/1.png');
-	formData.append('avatar_dest', globalimgname);
-	formData.append('avatar_projectdir', project_dir);
-	ajaxUpload(formData);
-	$image.cropper('destroy');
+	if (globalimgside) {
+		// courtesy of http://sierrafire.cr.usgs.gov/images/loading.gif
+		if (globalimgtag != "" && globalcubesideimg != "") {
+			$(globalimgtag).attr('src', 'images/loading.gif?' + nd());
+			$(globalcubesideimg).attr('src', 'images/loading.gif?' + nd());
+		}
+		cropBoxData = $image.cropper('getCropBoxData');
+		canvasData = $image.cropper('getCanvasData');
+		cropData = $image.cropper('getData');
+		var json = [
+			'{"x":' + cropData.x,
+			'"y":' + cropData.y,
+			'"height":' + cropData.height,
+			'"width":' + cropData.width,
+			'"rotate":' + cropData.rotate + '}'
+		].join();
+		var fileInput = document.getElementById(globalimgside);
+		var file = fileInput.files[0];
+		var formData = new FormData();
+		formData.append('avatar_file', file);
+		formData.append('avatar_data', json);
+		formData.append('avatar_src', '../images/1.png');
+		formData.append('avatar_dest', globalimgname);
+		formData.append('avatar_projectdir', project_dir);
+		ajaxUpload(formData);
+		$image.cropper('destroy');
+	}
 });
 
 
