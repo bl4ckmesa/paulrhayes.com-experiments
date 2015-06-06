@@ -310,8 +310,6 @@ var cropperOptions = {
 	aspectRatio: 1/1,
 	autoCropArea: 1,
 	dragCrop: 0,
-	modal: true,
-	responsive: false,
 	built: function () {
 		// Strict mode: set crop box data first
 		$image.cropper('setCropBoxData', cropBoxData);
@@ -328,7 +326,7 @@ $('#cropperModal').on('shown.bs.modal', function () {
 }).on('hidden.bs.modal', function () {
 	if (globalimgside) {
 		// courtesy of http://sierrafire.cr.usgs.gov/images/loading.gif
-		if (globalimgtag != "" && globalcubesideimg != "") {
+		if (globalimgtag != "" && globalcubesideimg != "" && $image.cropper()) {
 			$(globalimgtag).attr('src', 'images/loading.gif?' + nd());
 			$(globalcubesideimg).attr('src', 'images/loading.gif?' + nd());
 		}

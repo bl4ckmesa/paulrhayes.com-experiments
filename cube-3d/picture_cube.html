@@ -342,7 +342,10 @@
 				<button class="btn btn-primary" onclick="$image.cropper('zoom', -0.1)" type="button">
 					<span class="glyphicon glyphicon-zoom-out"></span>
 				</button>
-				<button class="btn btn-primary" onclick="$image.cropper('destroy');$('#cropperModal').modal('hide')" type="button">
+				<button class="btn btn-primary" onclick="$('#cropperModal').modal('hide')" type="button">
+					<span class="glyphicon glyphicon-ok"></span>
+				</button>
+				<button class="btn btn-primary" onclick="$image.cropper('destroy');globalimgside = '';$('#cropperModal').modal('hide')" type="button">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</div> </div> </div>
